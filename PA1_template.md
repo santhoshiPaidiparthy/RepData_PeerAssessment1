@@ -2,15 +2,15 @@
 
 
 ## Data
-####This project uses the data provided along with  the assignment.
-#### Data : [Activity Monitoring Data](https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip)
+This project uses the data provided along with  the assignment.
+ Data : [Activity Monitoring Data](https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip)
 
-#### The variables included in this dataset are:
+ The variables included in this dataset are:
 
-#### . **steps**: Number of steps taking in a 5-minute interval (missing values are coded as NA)
-#### . **date**: The date on which the measurement was taken in YYYY-MM-DD format
-#### . **interval**: Identifier for the 5-minute interval in which measurement was taken
-#### The dataset is stored in a comma-separated-value (CSV) file and there are a total of 17,568 observations in this dataset.
+ * **steps**: Number of steps taking in a 5-minute interval (missing values are coded as NA)
+ * **date**: The date on which the measurement was taken in YYYY-MM-DD format
+ * **interval**: Identifier for the 5-minute interval in which measurement was taken
+ The dataset is stored in a comma-separated-value (CSV) file and there are a total of 17,568 observations in this dataset.
 
 
 ## Loading and preprocessing the data
@@ -89,7 +89,10 @@ plot(stepsbyinterval$interval,stepsbyinterval$steps, type="l", xlab="Interval", 
 
 ![](PA1_template_files/figure-html/unnamed-chunk-4-1.png)\
 
-#### The 5-minute interval that contains the maximum number of steps is
+
+
+
+#### 2. The 5-minute interval that contains the maximum number of steps is
 
 
 
@@ -105,6 +108,7 @@ minterval
 
 ## Imputing missing values
 
+                                              
 ####1. The total number of missing values in the dataset (i.e. the total number of rows with NAs)
 
 ```r
@@ -116,7 +120,9 @@ narows
 ## [1] 2304
 ```
 
-####2. The strategy for filling in all of the missing values in the dataset is using the  mean for that 5-minute interval.
+
+              
+#### 2. The strategy for filling in all of the missing values in the dataset is using the  mean for that 5-minute interval.
 
 ####Creating a new dataset that is equal to the original dataset but with the missing data filled in...
 
@@ -124,10 +130,14 @@ narows
 ```r
 cleaned_data <- transform(activitydat, steps = ifelse(is.na(activitydat$steps), stepsbyinterval$steps[match(activitydat$interval, stepsbyinterval$interval)], activitydat$steps))
 ```
-####3. Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
+
+                                                                                                  
+                     
+                     
+####3. Histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
 
 
-#### 1. Calculate the total number of steps taken per day using the imputed data.
+#### 3.1 Calculate the total number of steps taken per day using the imputed data.
 
 
 ```r
@@ -135,7 +145,8 @@ StepsPerDay2 <- aggregate(steps ~ date, cleaned_data, sum)
 ```
 
 
-####2. The Histogram showing the total number of steps taken each day 
+
+####3.2 The Histogram showing the total number of steps taken each day 
 
 ```r
 hist(StepsPerDay2$steps, main = "Total number of steps taken each day", xlab ="Number of steps", col = "green")
@@ -147,7 +158,8 @@ legend("topright", c("Imputed", "Non-imputed"), col=c("green", "red"), lwd=10)
 ![](PA1_template_files/figure-html/unnamed-chunk-9-1.png)\
 
 
-####3. The mean and median of the total number of steps taken per day
+
+####3.3 The mean and median of the total number of steps taken per day
 
 The mean of total number of steps taken per day is 
 
@@ -173,6 +185,7 @@ The median of total number of steps taken per day is
 ## [1] 10766.19
 ```
 
+
 ####Calculate the difference between the mean and median values for imputed and actual data.
 
 ```r
@@ -195,6 +208,7 @@ The median of total number of steps taken per day is
 ## [1] -1.188679
 ```
  There is not much difference between the mean and median values for imputed and actual data.
+ 
  
 ####Calculate the difference in total daily number of steps after imputing the data.
 
